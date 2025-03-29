@@ -40,6 +40,7 @@ class Book:
         Book.check_publishing_year(publishing_year)
         self.publishing_year = publishing_year
         self.pages = pages
+        # self.page_marker = 200
 
     @staticmethod
     # @input_error
@@ -57,6 +58,15 @@ class Book:
     # def
     def __str__(self) -> str:
         return f'{self.title} by {self.author} {self.__class__}'
+    
+    def __eq__(self, value):
+        if not isinstance(value, Book):
+            return False
+        return self.title == value.title and self.author == value.author and self.pages == self.pages
+        # return self.__dict__ == value.__dict__
+
+    def __repr__(self):
+        return str(self)
 
     def print_book_info(self):
         print(f'{self.title} by {self.author}')
@@ -90,14 +100,17 @@ class DataBook:
         if self.publishing_year > 2025:
             raise ValueError("Book is not published yet")
         
-AudioBook("The Hobbit", "J.R.R Tolkien", 1960, 180)
+# AudioBook("The Hobbit", "J.R.R Tolkien", 1960, 180)
 
 # hobbit_book = DataBook("The Hobbit", "J.R.R Tolkien", 1960)
 
 # hobbit_book.author = 'J.R.R Martin'
 # print(hobbit_book)
 
-# Book("The Hobbit", "J.R.R Tolkien", 2027)
+hobbit_book = Book("The Hobbit", "J.R.R Tolkien", 1960, 300)
+hobbit_book_two = Book("The Hobbit", "J.R.R Tolkien", 1970, 300)
+
+print(hobbit_book == hobbit_book_two)
 
 # hobbit_book = Book("The Hobbit", "J.R.R Tolkien", 2027)
 # print(generate_random_book())
