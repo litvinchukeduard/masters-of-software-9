@@ -50,6 +50,8 @@ class Book:
         Book.check_publishing_year(publishing_year)
         self.publishing_year = publishing_year
         self.pages = pages
+
+        self.__current_page = 0
         # self.page_marker = 200
 
     @staticmethod
@@ -96,11 +98,16 @@ class OnlineBook(Book):
 #         self.books.append(book)
 
 class Library(UserList):
+    
+    def print_all_books(self):
+        # for book in ["hello", "world"]:
+        for book in self:
+            print(book)
 
-    def append(self, element):
-        # if not isinstance(element, Book):
-        #     raise ValueError('')
-        self.append(element)
+    # def append(self, element):
+    #     # if not isinstance(element, Book):
+    #     #     raise ValueError('')
+    #     self.append(element)
     
 
 # @dataclass
@@ -134,15 +141,30 @@ class DataBook:
 # hobbit_book.author = 'J.R.R Martin'
 # print(hobbit_book)
 
-# hobbit_book = Book("The Hobbit", "J.R.R Tolkien", 1960, 300)
+hobbit_book = Book("The Hobbit", "J.R.R Tolkien", 1960, 300)
+# print(hobbit_book.__current_page)
+
+# print(dir(hobbit_book))
+# print(hobbit_book._Book__current_page)
+# hobbit_book._Book__current_page += 100
+# print(hobbit_book._Book__current_page)
+
+# hobbit_book.__current_page += 10
+# print(hobbit_book.__current_page)
+
+
 # hobbit_book_two = Book("The Hobbit", "J.R.R Tolkien", 1970, 300)
 
 # print(hobbit_book == hobbit_book_two)
-my_list = []
-library = Library()
+# my_list = []
+# library = Library()
+# library.append(Book("The Hobbit", "J.R.R Tolkien", 1960, 300))
+# library.append(Book("The Hobbit", "J.R.R Tolkien", 1970, 300))
 
-library.append(1)
-print(library)
+# library.append(1)
+# print(library)
+
+# library.print_all_books()
 # library.add_new_book(hobbit_book)
 # print(library.books)
 
