@@ -33,11 +33,13 @@ def generate_random_online_book():
 
 
 class Book:
-    def __init__(self, title: str, author: str, publishing_year: int):
+    def __init__(self, title: str, author: str, publishing_year: int, pages: int):
+        print("Base constructor")
         self.title = title
         self.author = author
         Book.check_publishing_year(publishing_year)
         self.publishing_year = publishing_year
+        self.pages = pages
 
     @staticmethod
     # @input_error
@@ -64,13 +66,17 @@ class OnlineBook(Book):
     def get_web_page(self):
         return f'www.example.com/book/{self.title}'
 
-@dataclass
-class AudioBook(Book):
-    title: str
-    author: str
-    publishing_year: int
-    length: int
+# @dataclass
+# class AudioBook(Book):
+#     title: str
+#     author: str
+#     publishing_year: int
+#     length: int
 
+class AudioBook(Book):
+    def __init__(self, title, author, publishing_year, pages, length):
+        self.length = length
+        super().__init__(title, author, publishing_year, pages)
 
 @dataclass(frozen=True)
 class DataBook:
@@ -84,7 +90,7 @@ class DataBook:
         if self.publishing_year > 2025:
             raise ValueError("Book is not published yet")
         
-AudioBook("")
+AudioBook("The Hobbit", "J.R.R Tolkien", 1960, 180)
 
 # hobbit_book = DataBook("The Hobbit", "J.R.R Tolkien", 1960)
 
@@ -95,7 +101,7 @@ AudioBook("")
 
 # hobbit_book = Book("The Hobbit", "J.R.R Tolkien", 2027)
 # print(generate_random_book())
-print(OnlineBook.generate_random_book())
+# print(OnlineBook.generate_random_book())
 # print(dir(hobbit_book))
 # int, dict, str, set
 
