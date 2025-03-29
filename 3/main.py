@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from collections import UserList
 import random
 '''
 Створити структуру, яка дозволить керувати бібліотекою
@@ -14,6 +15,15 @@ import random
 
 def print_book(book: dict):
     print(f'{book['title']} of {book['author']}')
+
+
+def error_handler(func):
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ValueError:
+            return "Error happen"
+    return wrapper
 
 
 titles = ["The Hobbit", "Lord of the Rings", "1984"]
@@ -43,6 +53,7 @@ class Book:
         # self.page_marker = 200
 
     @staticmethod
+    # @error_handler
     # @input_error
     def check_publishing_year(publishing_year):
         if (publishing_year > 2025):
@@ -75,6 +86,22 @@ class Book:
 class OnlineBook(Book):
     def get_web_page(self):
         return f'www.example.com/book/{self.title}'
+    
+
+# class Library:
+#     def __init__(self):
+#         self.books = []
+
+#     def add_new_book(self, book: Book):
+#         self.books.append(book)
+
+class Library(UserList):
+
+    def append(self, element):
+        # if not isinstance(element, Book):
+        #     raise ValueError('')
+        self.append(element)
+    
 
 # @dataclass
 # class AudioBook(Book):
@@ -107,10 +134,17 @@ class DataBook:
 # hobbit_book.author = 'J.R.R Martin'
 # print(hobbit_book)
 
-hobbit_book = Book("The Hobbit", "J.R.R Tolkien", 1960, 300)
-hobbit_book_two = Book("The Hobbit", "J.R.R Tolkien", 1970, 300)
+# hobbit_book = Book("The Hobbit", "J.R.R Tolkien", 1960, 300)
+# hobbit_book_two = Book("The Hobbit", "J.R.R Tolkien", 1970, 300)
 
-print(hobbit_book == hobbit_book_two)
+# print(hobbit_book == hobbit_book_two)
+my_list = []
+library = Library()
+
+library.append(1)
+print(library)
+# library.add_new_book(hobbit_book)
+# print(library.books)
 
 # hobbit_book = Book("The Hobbit", "J.R.R Tolkien", 2027)
 # print(generate_random_book())
